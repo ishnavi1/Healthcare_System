@@ -16,9 +16,6 @@ Key Features:
 
 System Requirements
 List the prerequisites for running the project.
-
-markdown
-Copy code
 - Python 3.10 or later
 - PostgreSQL
 - Redis server
@@ -27,16 +24,39 @@ Copy code
 # Installation
 
 1. Clone the repository:
-   git clone https://github.com/username/healthcare-project.git
+   git clone https://github.com/ishnavi1/Healthcare_System.git
    cd healthcare-project
 2. Create and activate a virtual environment:
    python -m venv venv
    source venv/bin/activate  # On Windows: venv\Scripts\activate
 3. Install the dependencies:
    pip install -r requirements.txt
+
 4. Set up the database:
    Install PostgreSQL and create a database (e.g., healthcare_db).
    Update settings.py with your database credentials.
+   DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'healthcare_db',
+        'USER': 'h_user',
+        'PASSWORD': '123',
+        'HOST': '127.0.0.1',
+        'PORT': '5432',
+    }
+}
+
+INSTALLED_APPS = [
+    'django.contrib.admin',
+    'django.contrib.auth',
+    'django.contrib.contenttypes',
+    'django.contrib.sessions',
+    'django.contrib.messages',
+    'django.contrib.staticfiles',
+    'healthcare',
+    'rest_framework',
+    'django_celery_results',
+]
 5. Apply migrations:
    python manage.py makemigrations
    python manage.py migrate
