@@ -35,6 +35,13 @@ List the prerequisites for running the project.
 4. Set up the database:
    Install PostgreSQL and create a database (e.g., healthcare_db).
    Update settings.py with your database credentials.
+5. Apply migrations:
+   python manage.py makemigrations
+   python manage.py migrate
+6. Start the Redis server:
+   redis-server
+7. Run the development server:
+   python manage.py runserver
    DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
@@ -57,13 +64,6 @@ INSTALLED_APPS = [
     'rest_framework',
     'django_celery_results',
 ]
-5. Apply migrations:
-   python manage.py makemigrations
-   python manage.py migrate
-6. Start the Redis server:
-   redis-server
-7. Run the development server:
-   python manage.py runserver
 
 # Running Background Tasks with Celery
 1. Start the Celery worker:
@@ -80,9 +80,9 @@ INSTALLED_APPS = [
 - Celery processes the file asynchronously to prevent blocking the server.
 To test the feature:
 1. Start the Django server, Redis server, and Celery worker.
-2. Upload a file using Postman or cURL:
+2. Upload a file using Postman:
    
-   curl -X POST -F "file=@path/to/file.csv" http://127.0.0.1:8000/upload-file/
+   curl -X POST -F "file=@path/to/test_data.csv" http://127.0.0.1:8000/upload-file/
 
 # Troubleshooting
 
