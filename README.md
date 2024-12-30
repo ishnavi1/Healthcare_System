@@ -116,10 +116,10 @@ To test the feature:
    - `GET /api/appointments/`: Retrieve all appointments.
 
 # Redis Caching Setup
-Step 1: Configure Redis in settings.py
+1. Configure Redis in settings.py
 In your Django project's settings.py file, configure Redis for caching. Add the following configuration to the file:
 
-1. settings.py
+2. settings.py
 
 Caching Configuration
 CACHES = {
@@ -157,8 +157,8 @@ In this example:
 
 We check if the patient data is already cached using cache.get().
 If the data is not cached, it is fetched from the database and stored in the cache for 15 minutes with cache.set().
-Usage
-Run the Django Development Server: Start your Django server to begin using Redis caching.
+
+- Run the Django Development Server: Start your Django server to begin using Redis caching.
 
 - python manage.py runserver
 Access the App:
@@ -168,7 +168,7 @@ Caching is applied to frequently queried data such as patient and doctor details
 Testing Redis Cache
 You can test Redis caching by checking if the data is being cached correctly. Use the Django shell to verify cache functionality.
 
-Enter Django Shell:
+- Enter Django Shell:
 
 python manage.py shell
 Test Cache: Try setting and getting a value in the cache to confirm that Redis is working correctly.
