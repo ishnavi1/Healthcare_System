@@ -106,7 +106,7 @@ To test the feature:
 # API Documentation
 
 1. Import the Postman collection:
-   - Download the `postman_collection.json` file from the repository.
+   - Download the `Healthcare System.postman_collection.json` file from the repository.
    - Open Postman and import the file.
 
 2. API Endpoints:
