@@ -114,3 +114,69 @@ To test the feature:
    - `GET /api/patients/`: Retrieve all patients.
    - `POST /api/doctors/`: Add a new doctor.
    - `GET /api/appointments/`: Retrieve all appointments.
+
+# Redis Caching Setup
+Step 1: Configure Redis in settings.py
+In your Django project's settings.py file, configure Redis for caching. Add the following configuration to the file:
+
+1. settings.py
+
+Caching Configuration
+CACHES = {
+    'default': {
+        'BACKEND': 'django_redis.cache.RedisCache',
+        'LOCATION': 'redis://127.0.0.1:6379/1',  # Redis URL (127.0.0.1 is default)
+        'OPTIONS': {
+            'CLIENT_CLASS': 'django_redis.client.DefaultClient',
+        },
+    }
+}
+
+CACHE_TTL = 60 * 15  # Cache data for 15 minutes
+
+This configures Django to use Redis as the cache backend, where data will be cached in Redis for 15 minutes.
+
+2. Implement Caching in Views
+In your app's views.py, use caching for frequently queried data, like patient information or doctor lists. Below is an example for caching patient data:
+
+- views.py
+
+- from django.core.cache import cache
+- from .models import Patient
+
+def get_patient_data(request, patient_id):
+    cache_key = f"patient_{patient_id}"
+    patient_data = cache.get(cache_key)
+
+    if not patient_data:
+        patient_data = Patient.objects.get(id=patient_id)
+        cache.set(cache_key, patient_data, timeout=60*15)  # Cache for 15 minutes
+
+    return render(request, 'patient_detail.html', {'patient': patient_data})
+In this example:
+
+We check if the patient data is already cached using cache.get().
+If the data is not cached, it is fetched from the database and stored in the cache for 15 minutes with cache.set().
+Usage
+Run the Django Development Server: Start your Django server to begin using Redis caching.
+
+- python manage.py runserver
+Access the App:
+
+Visit http://127.0.0.1:8000/ to start interacting with the healthcare system.
+Caching is applied to frequently queried data such as patient and doctor details.
+Testing Redis Cache
+You can test Redis caching by checking if the data is being cached correctly. Use the Django shell to verify cache functionality.
+
+Enter Django Shell:
+
+python manage.py shell
+Test Cache: Try setting and getting a value in the cache to confirm that Redis is working correctly.
+
+1. from django.core.cache import cache
+
+2. Set a cache key-value pair
+cache.set('test_key', 'test_value', timeout=60)
+
+3. Get the cached value
+print(cache.get('test_key'))  # Output: 'value'

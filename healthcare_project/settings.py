@@ -41,6 +41,17 @@ INSTALLED_APPS = [
     'rest_framework',
     'django_celery_results',
 ]
+CACHES = {
+    'default': {
+        'BACKEND': 'django_redis.cache.RedisCache',
+        'LOCATION': 'redis://127.0.0.1:6379/1',  # Redis URL (127.0.0.1 is default)
+        'OPTIONS': {
+            'CLIENT_CLASS': 'django_redis.client.DefaultClient',
+        },
+    }
+}
+
+CACHE_TTL = 60 * 15  # Cache timeout of 15 minutes
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
