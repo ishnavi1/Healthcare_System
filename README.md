@@ -20,28 +20,29 @@ List the prerequisites for running the project.
 - PostgreSQL
 - Redis server
 - Celery
+- Postman
 
 # Installation
 
 1. Clone the repository:
-   git clone https://github.com/ishnavi1/Healthcare_System.git
-   cd healthcare-project
+   - git clone https://github.com/ishnavi1/Healthcare_System.git
+   - cd healthcare-project
 2. Create and activate a virtual environment:
-   python -m venv venv
-   source venv/bin/activate  # On Windows: venv\Scripts\activate
+   - python -m venv venv
+   - source venv/bin/activate  # On Windows: venv\Scripts\activate
 3. Install the dependencies:
-   pip install -r requirements.txt
+   - pip install -r requirements.txt
 
 4. Set up the database:
-   Install PostgreSQL and create a database (e.g., healthcare_db).
-   Update settings.py with your database credentials.
+   - Install PostgreSQL and create a database (e.g., healthcare_db).
+   - Update settings.py with your database credentials.
 5. Apply migrations:
-   python manage.py makemigrations
-   python manage.py migrate
+   - python manage.py makemigrations
+   - python manage.py migrate
 6. Start the Redis server:
-   redis-server
+   - redis-server
 7. Run the development server:
-   python manage.py runserver
+   - python manage.py runserver
    DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
@@ -67,13 +68,13 @@ INSTALLED_APPS = [
 
 # Running Background Tasks with Celery
 1. Start the Celery worker:
-   celery -A healthcare_project worker --loglevel=info
-   Start the Celery beat scheduler (if periodic tasks are required):
-   celery -A healthcare_project beat --loglevel=info
+  - celery -A healthcare_project worker --loglevel=info
+  - Start the Celery beat scheduler (if periodic tasks are required):
+  - celery -A healthcare_project beat --loglevel=info
 2. Verify that tasks are processed:
 3. Use the Celery worker logs to confirm task execution.
 4. Example:
-  Task healthcare.tasks.process_file_task completed.
+  - Task healthcare.tasks.process_file_task completed.
 
 # File Uploads with Celery
 - Large files are uploaded via the `POST /upload-file/` endpoint.
@@ -82,7 +83,7 @@ To test the feature:
 1. Start the Django server, Redis server, and Celery worker.
 2. Upload a file using Postman:
    
-   curl -X POST -F "file=@path/to/test_data.csv" http://127.0.0.1:8000/upload-file/
+   - curl -X POST -F "file=@path/to/test_data.csv" http://127.0.0.1:8000/upload-file/
 
 # Troubleshooting
 
