@@ -131,7 +131,6 @@ CACHES = {
         },
     }
 }
-
 CACHE_TTL = 60 * 15  # Cache data for 15 minutes
 
 This configures Django to use Redis as the cache backend, where data will be cached in Redis for 15 minutes.
@@ -139,17 +138,17 @@ This configures Django to use Redis as the cache backend, where data will be cac
 - Run the Django Development Server: Start your Django server to begin using Redis caching.
 
 - python manage.py runserver
-Access the App:
+- Access the App:
 
-Visit http://127.0.0.1:8000/ to start interacting with the healthcare system.
-Caching is applied to frequently queried data such as patient and doctor details.
+- Visit http://127.0.0.1:8000/ to start interacting with the healthcare system.
+- Caching is applied to frequently queried data such as patient and doctor details.
 Testing Redis Cache
-You can test Redis caching by checking if the data is being cached correctly. Use the Django shell to verify cache functionality.
+- You can test Redis caching by checking if the data is being cached correctly. Use the Django shell to verify cache functionality.
 
 - Enter Django Shell:
 
-python manage.py shell
-Test Cache: Try setting and getting a value in the cache to confirm that Redis is working correctly.
+- python manage.py shell
+- Test Cache: Try setting and getting a value in the cache to confirm that Redis is working correctly.
 
 1. from django.core.cache import cache
 
