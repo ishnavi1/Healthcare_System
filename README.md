@@ -136,28 +136,6 @@ CACHE_TTL = 60 * 15  # Cache data for 15 minutes
 
 This configures Django to use Redis as the cache backend, where data will be cached in Redis for 15 minutes.
 
-2. Implement Caching in Views
-In your app's views.py, use caching for frequently queried data, like patient information or doctor lists. Below is an example for caching patient data:
-
-- views.py
-
-- from django.core.cache import cache
-- from .models import Patient
-
-def get_patient_data(request, patient_id):
-    cache_key = f"patient_{patient_id}"
-    patient_data = cache.get(cache_key)
-
-    if not patient_data:
-        patient_data = Patient.objects.get(id=patient_id)
-        cache.set(cache_key, patient_data, timeout=60*15)  # Cache for 15 minutes
-
-    return render(request, 'patient_detail.html', {'patient': patient_data})
-In this example:
-
-We check if the patient data is already cached using cache.get().
-If the data is not cached, it is fetched from the database and stored in the cache for 15 minutes with cache.set().
-
 - Run the Django Development Server: Start your Django server to begin using Redis caching.
 
 - python manage.py runserver
